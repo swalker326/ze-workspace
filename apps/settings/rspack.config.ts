@@ -1,10 +1,9 @@
 import { defineConfig } from "@rspack/cli";
 import { rspack } from "@rspack/core";
 import * as RefreshPlugin from "@rspack/plugin-react-refresh";
-import { ModuleFederationPlugin } from "@module-federation/enhanced";
+import { ModuleFederationPlugin } from "@module-federation/enhanced/rspack";
 import { withZephyr } from "zephyr-webpack-plugin";
 import { config as moduleFederationConfig } from "./module-federation.config";
-import { dependencies } from "./package.json";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -61,25 +60,9 @@ export default defineConfig({
     new rspack.HtmlRspackPlugin({
       template: "./index.html"
     }),
-    isDev ? new RefreshPlugin() : null,
-    new ModuleFederationPlugin({
-      name: "settings",
-      filename: "remoteEntry.js",
-      exposes: {
-        "./Settings": "./src/App.tsx"
-      },
-      manifest: true,
-      shared: {
-        ...dependencies,
-        "react-dom": {
-          singleton: true
-        },
-        react: {
-          singleton: true
-        }
-      }
-    })
-  ].filter(Boolean),
+    new ModuleFederationPlugin(moduleFederationConfig),
+    isDev ? new RefreshPlugin() : null
+  ],
   optimization: {
     minimizer: [
       new rspack.SwcJsMinimizerRspackPlugin(),
