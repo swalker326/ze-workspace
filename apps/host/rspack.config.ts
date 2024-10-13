@@ -71,5 +71,5 @@ const config = defineConfig({
     css: true
   }
 });
-
+//@ts-ignore
 export default withZephyr()(config);
