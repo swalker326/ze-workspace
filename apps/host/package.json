@@ -9,10 +9,10 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@module-federation/enhanced": "^0.6.10",
+    "@module-federation/enhanced": "^0.6.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "zephyr-webpack-plugin": "^0.0.19"
+    "zephyr-webpack-plugin": "^0.0.21"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
