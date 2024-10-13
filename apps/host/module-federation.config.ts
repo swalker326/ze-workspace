@@ -3,14 +3,8 @@ import { ModuleFederationPluginOptions } from "@rspack/core";
 
 export const config: ModuleFederationPluginOptions = {
   name: "host",
-  remotes: ["settings@http://localhost:3001/remoteEntry.js"],
-  shared: {
-    // ...dependencies,
-    "react-dom": {
-      singleton: true
-    },
-    react: {
-      singleton: true
-    }
-  }
+  remotes: {
+    settings: "settings@http://localhost:3001/remoteEntry.js"
+  },
+  shared: ["react", "react-dom"]
 };

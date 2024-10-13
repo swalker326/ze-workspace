@@ -7,13 +7,5 @@ export const config = {
   exposes: {
     "./Settings": "./src/App.tsx"
   },
-  shared: {
-    ...dependencies,
-    "react-dom": {
-      singleton: true
-    },
-    react: {
-      singleton: true
-    }
-  }
+  shared: ["react", "react-dom"]
 };
