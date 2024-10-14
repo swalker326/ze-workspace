@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV === "development";
 // Target browsers, see: https://github.com/browserslist/browserslist
 const targets = ["chrome >= 87", "edge >= 88", "firefox >= 78", "safari >= 14"];
 
-export default defineConfig({
+export default withZephyr()({
   context: __dirname,
   output: {
     publicPath: "auto"
@@ -56,16 +56,19 @@ export default defineConfig({
       }
     ]
   },
+  //@ts-expect-error
   plugins: [
     new rspack.HtmlRspackPlugin({
       template: "./index.html"
     }),
     new ModuleFederationPlugin(moduleFederationConfig),
     isDev ? new RefreshPlugin() : null
-  ],
+  ].filter(Boolean),
   optimization: {
     minimizer: [
+      //@ts-expect-error
       new rspack.SwcJsMinimizerRspackPlugin(),
+      //@ts-expect-error
       new rspack.LightningCssMinimizerRspackPlugin({
         minimizerOptions: { targets }
       })
